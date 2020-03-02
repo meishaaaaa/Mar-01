@@ -4,7 +4,22 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class App {
+
+    public static int returnInteger(Integer ib, Function<Integer, Integer> fun1) {
+        Integer a = fun1.apply(ib);
+        return a;
+    }
+
+    public static void printCon(String s, Consumer<String> con1) {
+        con1.accept(s);
+    }
+
     public static void main(String[] args) {
+
+        //调用自己的创建方法
+        int abb = 10;
+        returnInteger(abb, b -> b * b);
+        System.out.println(returnInteger(abb, b -> b * b));
 
         //普通定义
         Function<Integer, Integer> function = new Function<Integer, Integer>() {
@@ -15,6 +30,7 @@ public class App {
         };
         System.out.println(function.apply(6));
 
+
         //Lambda表达式调用
         Function<Integer, Integer> lambdaFunction = i -> i * i;
         System.out.println(lambdaFunction.apply(7));
@@ -23,7 +39,7 @@ public class App {
         //自定义接口
         returnSquare rS = new returnSquare() {
             @Override
-            public Integer square(int i) {
+            public int square(int i) {
                 return i * i;
             }
         };
@@ -34,6 +50,10 @@ public class App {
             return i * i;
         };
         System.out.println(rSLambda.square(9));
+
+        //调用自己创建的方法
+        String str = "555";
+        printCon(str, a -> System.out.println("*" + a + "*"));
 
         //普通方式
         Consumer<String> con = new Consumer<String>() {
